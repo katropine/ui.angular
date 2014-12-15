@@ -1,4 +1,4 @@
-ui.modalWindowBinder module for AngularJS and Bootstrap
+angular-ui-modalWindowBinder module for AngularJS and Bootstrap
 =======================================================
 
 Multiple instances of Modal window
