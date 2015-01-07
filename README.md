@@ -7,8 +7,10 @@ Demo:
 http://plnkr.co/v9MDSEtsYwLS5HjAW8UL
 
 
-angular-ui ultraSelect (advanced select-multiselect/dropdown)
+angular-ui ultraSelect
 ==============================================
+Advanced select-multiselect/dropdown
+
 Requirements: AngularJS, Bootstrap, jQuery
 
 ```html
@@ -33,3 +35,5 @@ Requirements: AngularJS, Bootstrap, jQuery
     option-multiselect="true"
     ></ultra-select>
 ```
+Demo
+http://katropine.com/angular/
