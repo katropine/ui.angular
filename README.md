@@ -35,5 +35,4 @@ Requirements: AngularJS, Bootstrap, jQuery
     option-multiselect="true"
     ></ultra-select>
 ```
-Demo
-http://katropine.com/angular/
+Demo: http://katropine.com/angular/
