@@ -34,5 +34,17 @@ Requirements: AngularJS, Bootstrap, jQuery
     option-search="true" 
     option-multiselect="true"
     ></ultra-select>
+    
+    <ultra-select
+    template-url="views/ultra-select.html"
+    id="us3" 
+    option-class="btn-warning" 
+    data="data" 
+    option-title="name" 
+    option-unique-id="id" 
+    ng-model="cnt3" 
+    option-search="true" 
+    option-multiselect="true"
+    ></ultra-select>
 ```
 Demo: http://katropine.com/angular/
