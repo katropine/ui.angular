@@ -1,4 +1,5 @@
 /*
+ ui.katropine.form 
  UltraSelect v1.0
  (c) 2014-2015 Katropine, http://katropine.com
  License: MIT
@@ -55,40 +56,58 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
         template: template,
         // befor compile 
         controller: function ($scope, $element, $attrs) {
-            $scope.elid = $attrs.id;
-            $scope.selectedTitle = null;
-            $scope.show = false;
-            $scope.dataFiltered = $scope.data;
-            $scope.$watch('data', function () {
-                $scope.dataFiltered = $scope.data;
-            });
-            $scope.optionClass = ($attrs.optionClass == undefined || $attrs.optionClass == '') ? 'btn-default' : $attrs.optionClass;
+            
         },
         // after compile
         link: function (scope, element, attrs, ngModel) {
-
-            if (scope.optionMultiselect) {
-                scope.ngModel = {values: []};
-            }
+            
+            
             jQuery(document).on('click', '.us-searchbox input', function (e) {
                 return false;
             });
-            scope.$watch(function () {
-                if (scope.optionMultiselect) {
-                    if (ngModel.$modelValue.values.length > 0) {
-                        angular.forEach(ngModel.$modelValue.values, function (obj, i) {
-                            ngModel.$modelValue.values[i]._selected = 1;
-                        });
-                        scope.ngModel.values = ngModel.$modelValue.values;
-                        setSelectedTitle();
+            
+            
+            scope.$watch('data', function () {
+                scope.dataFiltered = null;
+               
+                if(angular.isDefined(scope.data) && scope.data.length > 0){
+                    
+                    scope.elid = attrs.id;
+                    scope.selectedTitle = null;
+                    scope.show = false;
+
+                    scope.optionClass = (attrs.optionClass == undefined || attrs.optionClass == '') ? 'btn-default' : attrs.optionClass;
+
+                    if (scope.optionMultiselect) {
+                        scope.ngModel = {values: []};
                     }
-                } else {
-                    if (ngModel.$modelValue[scope.optionTitle] != undefined) {
-                        scope.ngModel = ngModel.$modelValue;
-                        setSelectedTitle(scope.ngModel);
+                    
+                    scope.dataFiltered = angular.copy(scope.data); 
+                    newModel = angular.copy(ngModel.$modelValue);
+                    if (scope.optionMultiselect) {
+                        if (newModel.values.length > 0) {
+                            angular.forEach(scope.dataFiltered, function (obj, i) {
+                                angular.forEach(newModel.values, function (selected, j) {
+                                    if(selected[scope.optionUniqueId] == obj[scope.optionUniqueId]){
+                                        scope.dataFiltered[i]._selected = 1;
+                                    }
+                                });
+                            });
+                            scope.ngModel.values = newModel.values;
+                            setSelectedTitle();
+                        }
+                    } else {
+                        if (newModel[scope.optionTitle] != undefined) {
+                            scope.ngModel = newModel;
+                            setSelectedTitle(scope.ngModel);
+                        }
                     }
+                    
                 }
             });
+            
+            /************* init end ********/
+            
             scope.setSelectedObject = function (e, obj) {
                 e.preventDefault();
                 if (scope.optionMultiselect) {
