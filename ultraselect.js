@@ -68,9 +68,21 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             jQuery(document).on('click', '.us-searchbox input', function (e) {
                 return false;
             });
+            var sanityCheck = function(){
+                if(attrs.optionTitle == ''){
+                    throw 'Error: [UltraSelect] id is undefined';
+                }
+                if(attrs.optionTitle == ''){
+                    throw 'Error: [UltraSelect] optionTitle is undefined';
+                }
+                if(attrs.optionUniqueId == ''){
+                    throw 'Error: [UltraSelect] optionUniqueId is undefined';
+                }                
+            };
             
-            
+            sanityCheck();
             scope.$watch('data', function () {
+                
                 scope.dataFiltered = null;
                 scope.selectedTitle = LOADING;
                 if(angular.isDefined(scope.data) && scope.data.length > 0){
