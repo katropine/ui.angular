@@ -13,6 +13,8 @@ Advanced select-multiselect/dropdown
 
 Requirements: AngularJS, Bootstrap, jQuery
 
+Demo: http://katropine.com/angular/
+
 ```html
 <ultra-select 
     id="us1" 
@@ -57,4 +59,3 @@ Requirements: AngularJS, Bootstrap, jQuery
     option-search                           - (boolean) show search field 
     option-multiselect                      - (boolean) multi select or single select
 ```
-Demo: http://katropine.com/angular/
