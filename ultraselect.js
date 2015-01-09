@@ -39,7 +39,10 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
     template += '</li>';
     template += '</ul>';
     template += '</div>';
-
+    
+    var LOADING = "Loading....";
+    var SELECTED = " selected";
+    
     return {
         restrict: 'E',
         replace: true,
@@ -69,7 +72,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             
             scope.$watch('data', function () {
                 scope.dataFiltered = null;
-               
+                scope.selectedTitle = LOADING;
                 if(angular.isDefined(scope.data) && scope.data.length > 0){
                     
                     scope.elid = attrs.id;
@@ -94,11 +97,13 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                                 });
                             });
                             scope.ngModel.values = newModel.values;
+                            scope.selectedTitle = '';
                             setSelectedTitle();
                         }
                     } else {
                         if (newModel[scope.optionTitle] != undefined) {
                             scope.ngModel = newModel;
+                            scope.selectedTitle = '';
                             setSelectedTitle(scope.ngModel);
                         }
                     }
@@ -154,7 +159,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                     } else if (title.length < 6) {
                         scope.selectedTitle = title.join(', ');
                     } else {
-                        scope.selectedTitle = title.length + " selected";
+                        scope.selectedTitle = title.length + SELECTED;
                     }
                 } else {
                     scope.selectedTitle = obj[scope.optionTitle];
