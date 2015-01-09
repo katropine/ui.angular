@@ -36,15 +36,15 @@ Requirements: AngularJS, Bootstrap, jQuery
     ></ultra-select>
     
 <ultra-select
-    template-url="views/ultra-select.html"  // template file, overrides the built in one
-    id="us3"                                // element id, needed in case of multiple instances
-    option-class="btn-warning"              // btn type 
-    data="data"                             // array of objects [{id: 1, name: 'Australia'}, {id:2, name: 'Serbia'}]
-    option-title="name"                     // field from 'data' to be used as item title
-    option-unique-id="id"                   // field from 'data' to be used as unique identifier of data object
-    ng-model="cnt3"                         // ngModel, selected data
-    option-search="true"                    // show search field
-    option-multiselect="true"               // multi select or single select
+    template-url="views/ultra-select.html"  
+    id="us3"                                
+    option-class="btn-warning"              
+    data="data"                             
+    option-title="name"                    
+    option-unique-id="id"                  
+    ng-model="cnt3"                         
+    option-search="true"                    
+    option-multiselect="true"               
     ></ultra-select>
     
     template-url                            - template file, overrides the built in one
