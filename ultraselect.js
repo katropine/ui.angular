@@ -65,8 +65,8 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
         link: function (scope, element, attrs, ngModel) {
             
             
-            jQuery(document).on('click', '.us-searchbox input', function (e) {
-                return false;
+            jQuery('.dropdown-menu input').click(function(e) {
+                e.stopPropagation();
             });
             var sanityCheck = function(){
                 if(attrs.optionTitle == ''){
