@@ -1,6 +1,6 @@
 /*
  ui.katropine.form 
- UltraSelect v1.0
+ UltraSelect v1.1
  (c) 2014-2015 Katropine, http://katropine.com
  License: MIT
 */
@@ -68,6 +68,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             jQuery('.dropdown-menu input').click(function(e) {
                 e.stopPropagation();
             });
+            
             var sanityCheck = function(){
                 if(attrs.optionTitle == ''){
                     throw 'Error: [UltraSelect] id is undefined';
@@ -81,6 +82,12 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             };
             
             sanityCheck();
+            scope.$watch('ngModel', function () {
+                
+                if(ngModel.$modelValue == undefined){
+                    scope.unsetSelected();
+                }
+            });
             scope.$watch('data', function () {
                 
                 scope.dataFiltered = null;
@@ -118,6 +125,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                             scope.selectedTitle = '';
                             setSelectedTitle(scope.ngModel);
                         }
+                        
                     }
                     
                 }
