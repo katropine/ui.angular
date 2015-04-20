@@ -86,6 +86,8 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                 
                 if(ngModel.$modelValue == undefined){
                     scope.unsetSelected();
+                }else{
+                    setSelectedTitle(ngModel.$modelValue);
                 }
             });
             scope.$watch('data', function () {
