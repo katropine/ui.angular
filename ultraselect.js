@@ -1,6 +1,6 @@
 /*
  ui.katropine.form 
- UltraSelect v1.2
+ UltraSelect v1.0
  (c) 2014-2015 Katropine, http://katropine.com
  License: MIT
 */
@@ -82,10 +82,14 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             sanityCheck();
             scope.$watch('ngModel', function () {
                 
-                if(ngModel.$modelValue == undefined){
+                if(angular.isUndefined(ngModel.$modelValue)){
                     scope.unsetSelected();
                 }else{
-                    setSelectedTitle(ngModel.$modelValue);
+                    if(scope.optionMultiselect && (angular.isUndefined(ngModel.$modelValue.values) || ngModel.$modelValue.values.length == 0)){
+                       // do nothing
+                    }else{
+                        setSelectedTitle(ngModel.$modelValue);
+                    }
                 }
             });
             scope.$watch('data', function () {
