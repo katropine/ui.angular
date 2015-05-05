@@ -1,10 +1,10 @@
 /*
  ui.katropine.form 
- UltraSelect v1.1
+ UltraSelect v1.2
  (c) 2014-2015 Katropine, http://katropine.com
  License: MIT
 */
-angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filter) {
+angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filter, $templateCache, $compile, $http, $parse) {
     var template = '<div class="dropdown">';
     template += '<button class="btn {{optionClass}} dropdown-toggle" type="button" id="{{elid}}" data-toggle="dropdown" aria-expanded="true">';
     template += '<span ng-if="selectedTitle == null">Select</span>';
@@ -46,7 +46,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
     return {
         restrict: 'E',
         replace: true,
-        require: 'ngModel',
+        require: '?ngModel',
         scope: {
             data: '=',
             ngModel: '=',
@@ -55,15 +55,13 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             optionSearch: '=optionSearch',
             optionMultiselect: '=optionMultiselect'
         },
-        //templateUrl: 'views/ultra-select.html',
+
         template: template,
-        // befor compile 
         controller: function ($scope, $element, $attrs) {
             
         },
         // after compile
         link: function (scope, element, attrs, ngModel) {
-            
             
             jQuery('.dropdown-menu input').click(function(e) {
                 e.stopPropagation();
@@ -109,7 +107,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                     scope.dataFiltered = angular.copy(scope.data); 
                     newModel = angular.copy(ngModel.$modelValue);
                     if (scope.optionMultiselect) {
-                        if (newModel.values.length > 0) {
+                        if (newModel.values != undefined && newModel.values.length > 0) {
                             angular.forEach(scope.dataFiltered, function (obj, i) {
                                 angular.forEach(newModel.values, function (selected, j) {
                                     if(selected[scope.optionUniqueId] == obj[scope.optionUniqueId]){
@@ -131,8 +129,16 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                     }
                     
                 }
+                
+                
             });
-            
+
+            if (angular.isDefined(attrs.templateUrl)) {
+                var boom = $parse(attrs.data)(scope);
+                $http.get(attrs.templateUrl, {cache: $templateCache}).success(function (tplContent) {
+                    element.replaceWith($compile(tplContent)(scope));
+                });
+            }
             /************* init end ********/
             
             scope.setSelectedObject = function (e, obj) {
