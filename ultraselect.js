@@ -17,7 +17,7 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
     template += '<ul class="dropdown-menu" role="menu" style="max-height: 340px; overflow-y: scroll;">';
     template += '<li role="presentation">';
     template += '<div class="us-searchbox" ng-show="optionSearch">';
-    template += '<input class="input-block-level form-control us-searchfield" type="text" ng-model="searchText" autocomplete="off" placeholder="Search">';
+    template += '<input class="input-block-level form-control us-searchfield" type="text" ng-model="searchText" ng-click="preventDef($event)" autocomplete="off" placeholder="Search">';
     template += '</div>';
     template += '<div ng-if="optionMultiselect" style="color:#000; padding: 3px 20px; float: right;">';
     template += '<a style="clear: both; color: #333; cursor: pointer;" ng-click="checkAll($event)"><span class="glyphicon glyphicon-check"></span> Check all</a>';
@@ -66,6 +66,10 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
             jQuery('.dropdown-menu input').click(function(e) {
                 e.stopPropagation();
             });
+            scope.preventDef = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            };
             
             var sanityCheck = function(){
                 if(attrs.optionTitle == ''){
