@@ -1,6 +1,6 @@
 /*
  ui.katropine.form 
- UltraSelect v1.0
+ UltraSelect v1.2
  (c) 2014-2015 Katropine, http://katropine.com
  License: MIT
 */
@@ -20,8 +20,8 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
     template += '<input class="input-block-level form-control us-searchfield" type="text" ng-model="searchText" autocomplete="off" placeholder="Search">';
     template += '</div>';
     template += '<div ng-if="optionMultiselect" style="color:#000; padding: 3px 20px; float: right;">';
-    template += '<a href="#" style="clear: both; color: #333;" ng-click="checkAll($event)"><span class="glyphicon glyphicon-check"></span> Check all</a>';
-    template += '&nbsp;<a href="#" style="clear: both; color: #333;" ng-click="unCheckAll($event)"><span class="glyphicon glyphicon-unchecked"></span> Un-check all</a>';
+    template += '<a style="clear: both; color: #333; cursor: pointer;" ng-click="checkAll($event)"><span class="glyphicon glyphicon-check"></span> Check all</a>';
+    template += '&nbsp;<a style="clear: both; color: #333; cursor: pointer;" ng-click="unCheckAll($event)"><span class="glyphicon glyphicon-unchecked"></span> Un-check all</a>';
     template += '</div>  ';
     template += '</li>';
     template += '<li ng-repeat="row in dataFiltered" role="presentation">';
@@ -128,13 +128,9 @@ angular.module('ui.katropine.form', []).directive('ultraSelect', function ($filt
                             scope.ngModel = newModel;
                             scope.selectedTitle = '';
                             setSelectedTitle(scope.ngModel);
-                        }
-                        
-                    }
-                    
-                }
-                
-                
+                        }   
+                    }   
+                }    
             });
 
             if (angular.isDefined(attrs.templateUrl)) {
